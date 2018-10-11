@@ -1,6 +1,9 @@
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby Default Starter',
+    title: 'Dribble for the Cure',
+    //description: '',
+    //url: 'https://alumni.dailybruin.com',
+    //twitter: '@dailybruin',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -17,5 +20,13 @@ module.exports = {
       },
     },
     'gatsby-plugin-offline',
+    'gatsby-plugin-sass',
+    'gatsby-plugin-typescript',
+    {
+      resolve: 'gatsby-plugin-typography',
+      options: {
+        pathToConfigModule: 'src/utils/typography.js',
+      },
+    },
   ],
 }
