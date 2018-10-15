@@ -1,6 +1,7 @@
 import React from 'react';
 import './style.scss';
 import Img from '../images/web.sp.dbcstillphoto.JS.jpg';
+import Vid from '../images/DribbleBounce.mp4';
 interface BoardProps {
   backgroundSrc: string;
   iconSrc: string;
@@ -13,7 +14,13 @@ export default class Board extends React.Component<BoardProps> {
     const { backgroundSrc, iconSrc, title, subtitle } = this.props;
     return <div className="board">
       <div className="background-wrapper">
-        <img className="background" src={Img} alt="board background" />
+        <video muted autoPlay preload="auto"
+        src={Vid}
+        width="100%"
+        height="100%"
+        className="vi">
+          <img className="background" src={Img} alt="board background" />
+        </video>
         <div className="background-filter"/>
       </div>
       <div className="text">

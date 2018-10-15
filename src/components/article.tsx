@@ -34,17 +34,13 @@ export function Image(props: ImageProps) {
 export function Video(props: VideoProps) {
   return (
     <figure>
-      <video controls
-              muted
-              src={props.url}
-              width="100%"
-              height="100%"
-              className="vi">
-                  Sorry, your browser doesn't support embedded videos.
+      <video muted
+        src={props.url}
+        width="100%"
+        height="100%"
+        className="vi" autoPlay loop>
+          Sorry, your browser doesn't support embedded videos.
       </video>
-      <figcaption>
-        {props.caption} ({props.credit})
-      </figcaption>
     </figure>
   )
 }
