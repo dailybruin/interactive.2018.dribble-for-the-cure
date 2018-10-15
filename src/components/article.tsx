@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './style.scss';
 
 export interface ImageProps {
   index: number // KSM: added for indexing of slide image
@@ -19,10 +20,12 @@ export interface VideoProps {
 
 export function Image(props: ImageProps) {
   return (
-    <figure>
+    <figure className="img-container">
       <img src={props.url} alt={props.alt} onClick={() => props.mediaOnClick()} />
-      <figcaption>
-        {props.caption} ({props.credit})
+      <figcaption className="caption-container">
+        <div className="caption">
+          {props.caption} ({props.credit})
+        </div>
       </figcaption>
     </figure>
   )
