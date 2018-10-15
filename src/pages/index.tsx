@@ -9,6 +9,7 @@ import Board from '../components/board';
 import { ProgressContext } from '../contexts/contexts';
 import Carousel from 'nuka-carousel';
 import ScrollPercentage from 'react-scroll-percentage';
+import { css } from 'emotion';
 
 import Image1 from '../images/web.sp.dbcJoy.AN.jpg';
 import Image2 from '../images/web.sp.dbcJoy.JS.picB.jpg';
@@ -52,11 +53,11 @@ class IndexPage extends React.Component<{}, IndexPageState> {
 
     this.state = {
       entries: [
-        {percent: 0, id: "test-0", title: "Drake Stadium"},
-        {percent: 0, id: "test-1", title: "Wallis Annenberg Stadium"},
-        {percent: 0, id: "test-2", title: "Janss Steps"},
-        {percent: 0, id: "test-3", title: "Bruin Plaza"},
-        {percent: 0, id: "test-4", title: "Pauley Pavillion"}
+        {percent: 0, id: "Drake", title: "Drake Stadium"},
+        {percent: 0, id: "Wallis", title: "Wallis Annenberg Stadium"},
+        {percent: 0, id: "Janss", title: "Janss Steps"},
+        {percent: 0, id: "Plaza", title: "Bruin Plaza"},
+        {percent: 0, id: "Pauley", title: "Pauley Pavillion"}
       ],
       updateEntryPercent: this.updateEntryPercent,
       slides: [],
@@ -68,7 +69,14 @@ class IndexPage extends React.Component<{}, IndexPageState> {
   updateEntryPercent = (index, percent) => {
     const newEntries = this.state.entries.slice();
     if (index < newEntries.length) {
+      if(percent != 0){
+        for(let i = 0; i < index; i++) {
+          newEntries[i].percent = 1;
+        }
+      }
       newEntries[index].percent = percent;
+      if(index == 4 && percent > 0.75) 
+        newEntries[index].percent = 1;
       this.setState({ entries: newEntries });
     }
   };
@@ -93,7 +101,7 @@ class IndexPage extends React.Component<{}, IndexPageState> {
 
   article0 = () => {
     return(
-    <div id={`test-0`}>
+    <div id={`Drake`}>
       <ScrollPercentage onChange={(v) => this.state.updateEntryPercent(0, v)}>
         <Headline text="10-year-old entrepreneur and cancer survivor returns to LA to run layups and raise money"/>
         <h5>By: Joy Hong</h5>
@@ -155,7 +163,7 @@ class IndexPage extends React.Component<{}, IndexPageState> {
   }
 
   article1 = () => {
-    return (<div id={`test-1`}>
+    return (<div id={`Wallis`}>
         <ScrollPercentage onChange={(v) => this.state.updateEntryPercent(1, v)}>
           <Headline text="Now cancer-free, student gives back by advocating for awareness"/>
           <Article
@@ -203,7 +211,7 @@ class IndexPage extends React.Component<{}, IndexPageState> {
   }
 
   article2 = () => {
-    return (<div id={`test-2`}>
+    return (<div id={`Janss`}>
         <Headline text=""/>
         <ScrollPercentage onChange={(v) => this.state.updateEntryPercent(2, v)}>
       <Article
@@ -257,7 +265,7 @@ class IndexPage extends React.Component<{}, IndexPageState> {
   }
 
   article3 = () => {
-    return (<div id={`test-3`}>
+    return (<div id={`Plaza`}>
       <Headline text="Friends, family of young cancer patient team up to celebrate her memory"/>
       <ScrollPercentage onChange={(v) => this.state.updateEntryPercent(3, v)}>
     <Article
@@ -310,7 +318,7 @@ class IndexPage extends React.Component<{}, IndexPageState> {
   }
 
   article4 = () => {
-    return(<div id={`test-4`}>
+    return(<div id={`Pauley`}>
         <ScrollPercentage onChange={(v) => this.state.updateEntryPercent(4, v)}>
           <Headline text="Friends, family form team to celebrate memory of young cancer patient"/>
           <Article
@@ -434,7 +442,7 @@ class IndexPage extends React.Component<{}, IndexPageState> {
       <div>
         <Head
           siteName="Dribble for the Cure"
-          description="testing 123 123"
+          description="bouncing one step closer to a cure for pediatric cancer"
           url=""
           image="https://lh3.googleusercontent.com/Eg4qDeTD4Efy07T52jJj5DUG4oRyaetRH0UGfkHoT0jBeFlCoVdAVtLNuMq2vR1XkUbv=w300"
         />
@@ -442,25 +450,29 @@ class IndexPage extends React.Component<{}, IndexPageState> {
           backgroundSrc="https://images.unsplash.com/photo-1539442836969-3938f1cd2179?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=79e3365148694703fd13d85918c18903&auto=format&fit=crop&w=668&q=80"
           iconSrc="data:image/png;base64,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"
           title="dribble for the cure"
-          subtitle="mini-boom"
+          subtitle="bouncing one step closer to a cure for pediatric cancer"
           />
+          <p style={{width: "100%", padding: "0 8vw", textAlign: "center", marginBottom: "50px"}}>UCLA, along with the Pediatric Cancer Research Foundation and the Cancer Research Program at the Mattel Children’s Hospital, held its 11th annual Dribble for the Cure on Sunday. John Vallely, a former UCLA men’s basketball player under coach John Wooden, <a href="http://dailybruin.com/2018/10/12/former-ucla-basketball-player-leads-11th-annual-dribble-for-the-cure/">started the event in 2008</a>. This year’s Dribble was also a celebration of what would have been Wooden’s 108th birthday. The event raised money to go toward research and treatment for children fighting cancer.</p>
         <ProgressContext.Provider value={this.state}>
           <div style={{ position: this.state.showSlides ? "relative" : "static" }}>
-            <div style={{
-              position: 'sticky',
-              top: 0,
-              float: 'left',
-              width: '30%',
-            }}>
+            {window.innerWidth > 800 && <div className={css`
+              position: -webkit-sticky;
+              position: sticky;
+              top: 0;
+              float: left;
+              width: 30%;
+            `
+            }>
               <Menu />
             </div>
+            }
             <div style={{
               float: 'left',
-              width: '70%',
+              width: window.innerWidth > 800 ? '70%' : "100%",
             }}>
             </div>
             <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
-              <div style={{maxWidth: 700}}>
+              <div style={{maxWidth: 700,marginLeft: "15px", marginRight: "15px"}}>
                 {this.article0()}
                 {this.article1()}
                 {this.article2()}
@@ -492,6 +504,7 @@ class IndexPage extends React.Component<{}, IndexPageState> {
             }}></div>
           </div>
         }
+        <p style={{width: "100%", padding: "0 8vw", textAlign: "center", marginTop: "50px", marginBottom: "50px"}}>Check out more photos of the event <a href="https://dailybruin.com/2018/10/14/gallery-dribble-for-the-cure/">here</a>!</p>
         <Footer
           githubName={'https://github.com/dailybruin/interactive.2018.dribble-for-the-cure'}
           developers={['Richard Yang', 'Kevin Qian']}

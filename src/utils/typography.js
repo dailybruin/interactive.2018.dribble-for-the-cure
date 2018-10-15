@@ -4,16 +4,12 @@ import { injectGlobal } from 'emotion';
 const typography = new Typography({
   googleFonts: [
     {
-      name: 'Raleway',
+      name: 'Google Sans',
       styles: ['400', '800'],
     },
-    {
-      name: 'Source Sans Pro',
-      styles: ['300'],
-    },
   ],
-  headerFontFamily: ['Raleway', 'Helvetica Neue', 'Helvetica', 'sans-serif'],
-  bodyFontFamily: ['Source Sans Pro', 'Helvetica', 'sans-serif'],
+  headerFontFamily: ['Google Sans', 'Helvetica Neue', 'Helvetica', 'sans-serif'],
+  bodyFontFamily: ['Google Sans', 'Helvetica', 'sans-serif'],
 });
 
 injectGlobal`
