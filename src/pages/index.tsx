@@ -1,4 +1,7 @@
 import * as React from 'react';
+import 'intersection-observer';
+import smoothscroll from 'smoothscroll-polyfill';
+smoothscroll.polyfill();
 import { Head, Footer, Headline } from '@dailybruin/lux';
 import { Menu } from '../components/menu';
 import Article from '../components/article';
@@ -427,7 +430,7 @@ class IndexPage extends React.Component<{}, IndexPageState> {
           subtitle="mini-boom"
           />
         <ProgressContext.Provider value={this.state}>
-          <div style={{ position: this.state.showSlides ? "fixed" : "static" }}>
+          <div style={{ position: this.state.showSlides ? "relative" : "static" }}>
             <div style={{
               position: 'sticky',
               top: 0,
