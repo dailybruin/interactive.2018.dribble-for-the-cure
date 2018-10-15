@@ -393,7 +393,7 @@ class IndexPage extends React.Component<{}, IndexPageState> {
         <Head
           siteName="Dribble for the Cure"
           description="bouncing one step closer to a cure for pediatric cancer"
-          url=""
+          url="https://features.dailybruin.com/2017/close-to-home/"
           image="https://lh3.googleusercontent.com/Eg4qDeTD4Efy07T52jJj5DUG4oRyaetRH0UGfkHoT0jBeFlCoVdAVtLNuMq2vR1XkUbv=w300"
         />
         <Board 
