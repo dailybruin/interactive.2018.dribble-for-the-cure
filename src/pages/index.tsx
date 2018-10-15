@@ -3,8 +3,8 @@ import 'intersection-observer';
 import smoothscroll from 'smoothscroll-polyfill';
 smoothscroll.polyfill();
 import { Head, Footer, Headline } from '@dailybruin/lux';
-import { Menu } from '../components/menu';
 import Article from '../components/article';
+import { Menu } from '../components/menu';
 import Board from '../components/board';
 import { ProgressContext } from '../contexts/contexts';
 import Carousel from 'nuka-carousel';
@@ -52,11 +52,11 @@ class IndexPage extends React.Component<{}, IndexPageState> {
 
     this.state = {
       entries: [
-        {percent: 0, id: "test-0"},
-        {percent: 0, id: "test-1"},
-        {percent: 0, id: "test-2"},
-        {percent: 0, id: "test-3"},
-        {percent: 0, id: "test-4"}
+        {percent: 0, id: "test-0", title: "Drake Stadium"},
+        {percent: 0, id: "test-1", title: "Wallis Annenberg Stadium"},
+        {percent: 0, id: "test-2", title: "Janss Steps"},
+        {percent: 0, id: "test-3", title: "Bruin Plaza"},
+        {percent: 0, id: "test-4", title: "Pauley Pavillion"}
       ],
       updateEntryPercent: this.updateEntryPercent,
       slides: [],
@@ -210,6 +210,12 @@ class IndexPage extends React.Component<{}, IndexPageState> {
       key={2}
       content={[
         {
+          type: 'image',
+          url: Image5,
+          caption: `Leone Parks, a 4-year-old cancer patient, attended Dribble for the Cure with his brothers – 8-year-old Russell and 10-year-old Andrew – and his grandmother Laurel Parks.`,
+          credit: 'Alice Naland/Daily Bruin',
+        },
+        {
           type: 'text',
           value:
             `<p>Leone Parks wore his light-up Spiderman shoes as a reminder of his favorite superhero.</p>
@@ -224,10 +230,9 @@ class IndexPage extends React.Component<{}, IndexPageState> {
         },
         {
           type: 'image',
-          url: Image4,
-          caption:
-            'Freshman attacker Ashworth Molthen has registered 21 goals on the season, finding the back of the net in 13 of the 16 games so far this year for UCLA men’s water polo. UCLA is one of two teams remaining in the MPSF conference that remains undefeated.',
-          credit: 'Amy Dixon/Photo Editor',
+          url: Image6,
+          caption: `UCLA men's basketball redshirt freshman forward Jalen Hill was paired up with Leone Parks and his grandparents, Roger and Laurel Parks, during the event.`,
+          credit: 'Alice Naland/Daily Bruin',
         },
         {
           type: 'text',
@@ -259,6 +264,12 @@ class IndexPage extends React.Component<{}, IndexPageState> {
       key={3}
       content={[
         {
+          type: 'image',
+          url: Image7,
+          caption: `The Guru Simran team has been participating in the Dribble for the Cure for the past 10 years, joining to represent Guru Simran Kaur Khalsa. The team recently combined with the Hoop Masters baskeball club of West Los Angeles.`,
+          credit: 'Daniel Leibowitz/Daily Bruin staff',
+        },
+        {
           type: 'text',
           value:
             `<p>One person handing out maroon t-shirts emblazoned with “Gurusimran #8” stood out among the crowd gathered around the entrance to Drake Stadium. </p>
@@ -273,9 +284,9 @@ class IndexPage extends React.Component<{}, IndexPageState> {
         },
         {
           type: 'image',
-          url: Image5,
-          caption:`Leone Parks, a 4-year-old cancer patient, attended Dribble for the Cure with his brothers – 8-year-old Russell and 10-year-old Andrew – and his grandmother Laurel Parks.`,
-          credit: 'Alice Naland/Daily Bruin',
+          url: Image8,
+          caption: `Participant Dharam Dev Kaur Khalsa holds up one of the Guru Simran team shirts for size against redshirt junior guard Prince Ali before participating in the dribble around campus.`,
+          credit: 'Daniel Leibowitz/Daily Bruin staff',
         },
         {
           type: 'text',
@@ -306,6 +317,12 @@ class IndexPage extends React.Component<{}, IndexPageState> {
           key={4}
           content={[
             {
+              type: 'image',
+              url: Image9,
+              caption: `UCLA men’s basketball redshirt freshman forward Jalen Hill spent time with 4-year-old cancer patient Leone Parks at this year's Dribble for the Cure. Hill was one of many athletes present at the event.`,
+              credit: 'Axel Lopez/Assistant Photo editor',
+            },
+            {
               type: 'text',
               value:
                 `<p>Jalen Hill never lost sight of 4-year-old Leone Parks.</p>
@@ -328,11 +345,9 @@ class IndexPage extends React.Component<{}, IndexPageState> {
             },
             {
               type: 'image',
-              url:
-                'https://dailybruin.com/images/2018/10/web.sp_.mwp_.nbk_.ADX_-640x461.jpg',
-              caption:
-                'Freshman attacker Ashworth Molthen has registered 21 goals on the season, finding the back of the net in 13 of the 16 games so far this year for UCLA men’s water polo. UCLA is one of two teams remaining in the MPSF conference that remains undefeated.',
-              credit: 'Amy Dixon/Photo Editor',
+              url: Image10,
+              caption: `Women’s basketball redshirt senior forward Lajahna Drummer met up with 12-year-old Alanna Neale at Dribble for the Cure. Drummer said Neale has frequently attended the Bruins' basketball camps.`,
+              credit: 'Axel Lopez/Assistant Photo editor',
             },
             {
               type: 'text',

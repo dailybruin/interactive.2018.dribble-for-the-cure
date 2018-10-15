@@ -51,6 +51,7 @@ export class Menu extends React.Component {
       <MenuItem
         key={index}
         percent={entry.percent}
+        title={entry.title}
         onIconClick={() => document.getElementById(entry.id).scrollIntoView({behavior: "smooth", block: "start"})}
         />);
   };
