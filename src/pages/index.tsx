@@ -1,7 +1,7 @@
 import * as React from 'react';
 import 'intersection-observer';
 import smoothscroll from 'smoothscroll-polyfill';
-smoothscroll.polyfill();
+//smoothscroll.polyfill();
 import { Head, Footer, Headline, Byline } from '@dailybruin/lux';
 import Article from '../components/article';
 import { Menu } from '../components/menu';
@@ -39,6 +39,7 @@ interface IndexPageState {
   slides: any[];
   showSlides: boolean;
   slideIndex: number;
+  width: number;
 }
 
 /*
@@ -60,7 +61,9 @@ class IndexPage extends React.Component<{}, IndexPageState> {
       slides: [],
       showSlides: false,
       slideIndex: 1,
+      width: 0,
     };
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
 
   updateEntryPercent = (index, percent) => {
@@ -77,23 +80,20 @@ class IndexPage extends React.Component<{}, IndexPageState> {
       this.setState({ entries: newEntries });
     }
   };
-
-  componentDidMount() {
-    this.prepareSlides();
-    this.setState({
-      slideIndex: 0,
-    });
+  updateWindowDimensions() {
+    this.setState({ width: window.innerWidth});
   }
-
-  prepareSlides() {
-    // TODO: implement this
-    this.setState({
-      slides: [
-        {title: "1st", src: "https://picsum.photos/200/300/?image=0"},
-        {title: "2nd", src: "https://picsum.photos/200/300/?image=1"},
-        {title: "3rd", src: "https://picsum.photos/200/300/?image=2"}
-      ],
-    });
+  componentWillUnmount() {
+    if (typeof window !== `undefined`) {
+      window.removeEventListener('resize', this.updateWindowDimensions);
+    }
+    
+  }
+  componentDidMount() {
+    if (typeof window !== `undefined`) {
+      this.updateWindowDimensions();
+      window.addEventListener('resize', this.updateWindowDimensions);
+    }
   }
 
   article0 = () => {
@@ -217,9 +217,9 @@ class IndexPage extends React.Component<{}, IndexPageState> {
 
   article2 = () => {
     return (<div className={css`h1 {margin-bottom: 5px;}`} id={`Janss`}>
+      <ScrollPercentage onChange={(v) => this.state.updateEntryPercent(2, v)}>
         <Headline text="Young survivor finds web of support among family members"/>
         <Byline authors="Jacqueline Dzwonczyk" />
-        <ScrollPercentage onChange={(v) => this.state.updateEntryPercent(2, v)}>
       <Article
       key={2}
       content={[
@@ -405,7 +405,7 @@ class IndexPage extends React.Component<{}, IndexPageState> {
           <p style={{width: "100%", padding: "0 8vw", textAlign: "center", marginBottom: "50px"}}>UCLA, along with the Pediatric Cancer Research Foundation and the Cancer Research Program at the Mattel Children’s Hospital, held its 11th annual Dribble for the Cure on Sunday. John Vallely, a former UCLA men’s basketball player under coach John Wooden, <a href="http://dailybruin.com/2018/10/12/former-ucla-basketball-player-leads-11th-annual-dribble-for-the-cure/">started the event in 2008</a>. This year’s Dribble was also a celebration of what would have been Wooden’s 108th birthday. The event raised money to go toward research and treatment for children fighting cancer.</p>
         <ProgressContext.Provider value={this.state}>
           <div style={{ position: this.state.showSlides ? "relative" : "static" }}>
-            {window.innerWidth > 800 && <div className={css`
+            {this.state.width > 800 && <div className={css`
               position: -webkit-sticky;
               position: sticky;
               top: 0;
@@ -418,15 +418,19 @@ class IndexPage extends React.Component<{}, IndexPageState> {
             }
             <div style={{
               float: 'left',
-              width: window.innerWidth > 800 ? '70%' : "100%",
+              width: this.state.width > 800 ? '70%' : "100%",
             }}>
             </div>
             <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
               <div style={{maxWidth: 700,marginLeft: "15px", marginRight: "15px"}}>
                 {this.article0()}
+                <div style={{height: 50}}/>
                 {this.article1()}
+                <div style={{height: 50}}/>
                 {this.article2()}
+                <div style={{height: 50}}/>
                 {this.article3()}
+                <div style={{height: 50}}/>
                 {this.article4()}
               </div>
             </div>
