@@ -1,45 +1,44 @@
-import * as React from 'react';
-import 'intersection-observer';
-import smoothscroll from 'smoothscroll-polyfill';
+import * as React from 'react'
+import 'intersection-observer'
+import smoothscroll from 'smoothscroll-polyfill'
 //smoothscroll.polyfill();
-import { Head, Footer, Headline, Byline } from '@dailybruin/lux';
-import Article from '../components/article';
-import { Menu } from '../components/menu';
-import Board from '../components/board';
-import { ProgressContext } from '../contexts/contexts';
+import { Head, Footer, Headline, Byline } from '@dailybruin/lux'
+import Article from '../components/article'
+import { Menu } from '../components/menu'
+import Board from '../components/board'
+import { ProgressContext } from '../contexts/contexts'
 //import Carousel from 'nuka-carousel';
-import ScrollPercentage from 'react-scroll-percentage';
-import { css } from 'emotion';
+import ScrollPercentage from 'react-scroll-percentage'
+import { css } from 'emotion'
 
-import Image1 from '../images/web.sp.dbcJoy.AN.jpg';
-import Image2 from '../images/web.sp.dbcJoy.JS.picB.jpg';
-import Image3 from '../images/web.sp.dbc.Cassidy.AA.jpg';
-import Image4 from '../images/web.sp.dbcCassidy.AA.picB.jpg';
-import Image5 from '../images/web.sp.dbcJacqueline.AN.jpg';
-import Image6 from '../images/web.sp.dbcJacqueline.AN.picB.jpg';
-import Image7 from '../images/web.sp.dbcgabe.DLB.jpg';
-import Image8 from '../images/web.sp.dbcGabe.picB.DLB.jpg';
-import Image9 from '../images/web.sp.dbcAngie.AL.jpg';
-import Image10 from '../images/web.sp.dbcangie.AL.picB.jpg';
+import Image1 from '../images/web.sp.dbcJoy.AN.jpg'
+import Image2 from '../images/web.sp.dbcJoy.JS.picB.jpg'
+import Image3 from '../images/web.sp.dbc.Cassidy.AA.jpg'
+import Image4 from '../images/web.sp.dbcCassidy.AA.picB.jpg'
+import Image5 from '../images/web.sp.dbcJacqueline.AN.jpg'
+import Image6 from '../images/web.sp.dbcJacqueline.AN.picB.jpg'
+import Image7 from '../images/web.sp.dbcgabe.DLB.jpg'
+import Image8 from '../images/web.sp.dbcGabe.picB.DLB.jpg'
+import Image9 from '../images/web.sp.dbcAngie.AL.jpg'
+import Image10 from '../images/web.sp.dbcangie.AL.picB.jpg'
 
-import Video1 from '../images/Kohlervideo.mp4';
-import Video2 from '../images/StudentAthletes.mp4';
-
+import Video1 from '../images/Kohlervideo.mp4'
+import Video2 from '../images/StudentAthletes.mp4'
 
 // Custom implementation
 ScrollPercentage.calculatePercentage = (bounds, _) => {
   const vh = ScrollPercentage.viewportHeight()
   // When at page center, considered as entering
-  return Math.max(0, Math.min(1, -(bounds.top - 0 * vh) / bounds.height));
+  return Math.max(0, Math.min(1, -(bounds.top - 0 * vh) / bounds.height))
 }
 
 interface IndexPageState {
-  entries: any[];
-  updateEntryPercent: Function;
-  slides: any[];
-  showSlides: boolean;
-  slideIndex: number;
-  width: number;
+  entries: any[]
+  updateEntryPercent: Function
+  slides: any[]
+  showSlides: boolean
+  slideIndex: number
+  width: number
 }
 
 /*
@@ -47,72 +46,76 @@ interface IndexPageState {
  */
 class IndexPage extends React.Component<{}, IndexPageState> {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       entries: [
-        {percent: 0, id: "Drake", title: "Drake Stadium"},
-        {percent: 0, id: "Wallis", title: "Wallis Annenberg Stadium"},
-        {percent: 0, id: "Janss", title: "Janss Steps"},
-        {percent: 0, id: "Plaza", title: "Bruin Plaza"},
-        {percent: 0, id: "Pauley", title: "Pauley Pavillion"}
+        { percent: 0, id: 'Drake', title: 'Drake Stadium' },
+        { percent: 0, id: 'Wallis', title: 'Wallis Annenberg Stadium' },
+        { percent: 0, id: 'Janss', title: 'Janss Steps' },
+        { percent: 0, id: 'Plaza', title: 'Bruin Plaza' },
+        { percent: 0, id: 'Pauley', title: 'Pauley Pavillion' },
       ],
       updateEntryPercent: this.updateEntryPercent,
       slides: [],
       showSlides: false,
       slideIndex: 1,
       width: 0,
-    };
-    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+    }
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this)
   }
 
   updateEntryPercent = (index, percent) => {
-    const newEntries = this.state.entries.slice();
+    const newEntries = this.state.entries.slice()
     if (index < newEntries.length) {
-      if(percent != 0){
-        for(let i = 0; i < index; i++) {
-          newEntries[i].percent = 1;
+      if (percent != 0) {
+        for (let i = 0; i < index; i++) {
+          newEntries[i].percent = 1
         }
       }
-      newEntries[index].percent = percent;
-      if(index == 4 && percent > 0.75) 
-        newEntries[index].percent = 1;
-      this.setState({ entries: newEntries });
+      newEntries[index].percent = percent
+      if (index == 4 && percent > 0.75) newEntries[index].percent = 1
+      this.setState({ entries: newEntries })
     }
-  };
+  }
   updateWindowDimensions() {
-    this.setState({ width: window.innerWidth});
+    this.setState({ width: window.innerWidth })
   }
   componentWillUnmount() {
     if (typeof window !== `undefined`) {
-      window.removeEventListener('resize', this.updateWindowDimensions);
+      window.removeEventListener('resize', this.updateWindowDimensions)
     }
-    
   }
   componentDidMount() {
     if (typeof window !== `undefined`) {
-      this.updateWindowDimensions();
-      window.addEventListener('resize', this.updateWindowDimensions);
+      this.updateWindowDimensions()
+      window.addEventListener('resize', this.updateWindowDimensions)
     }
   }
 
   article0 = () => {
-    return(
-    <div className={css`h1 {margin-bottom: 5px;}`} id={`Drake`}>
-      <ScrollPercentage onChange={(v) => this.state.updateEntryPercent(0, v)}>
-        <Headline text="Ten-year-old entrepreneur inspires others to support, perspires on the court"/>
-        <Byline authors="Joy Hong" />
-        <Article
-          key={0}
-          content={[
-            {
-              type: 'video',
-              url: Video1,
-            },
-            {
-              type: 'text',
-              value:
-                `<p>Ten-year-old Alexa Kohler swatted a ball from Kris Wilkes as they crossed the finish line together.</p>
+    return (
+      <div
+        className={css`
+          h1 {
+            margin-bottom: 5px;
+          }
+        `}
+        id={`Drake`}
+      >
+        <ScrollPercentage onChange={v => this.state.updateEntryPercent(0, v)}>
+          <Headline text="Ten-year-old entrepreneur inspires others to support, perspires on the court" />
+          <Byline authors="Joy Hong" />
+          <Article
+            key={0}
+            content={[
+              {
+                type: 'video',
+                url: Video1,
+              },
+              {
+                type: 'text',
+                value: `<p>Ten-year-old Alexa Kohler swatted a ball from Kris Wilkes as they crossed the finish line together.</p>
                 <p>He dropped the ball. </p>
                 <p>“Ah, turnover,” said the UCLA men’s basketball sophomore guard. </p>
                 <p>Alexa ran to retrieve the ball – something she couldn’t have done five years ago.</p>
@@ -120,18 +123,17 @@ class IndexPage extends React.Component<{}, IndexPageState> {
                 <p>“We do some other (events) like Make-A-Wish (Foundation), and those go to really good causes,” said her father Pete Kohler. “But this is one of the only ones we really like and come back to (every year) because the money is going to doctors for research to come up with better treatments.”</p>
                 <p> Anything to improve medical advancement in pediatric cancer research has been a priority for the Kohler family. Karrie Kohler, Alexa’s mother, said it took nearly a year to confirm Alexa’s diagnosis.</p>
                 <p>At first, doctors told the family that her frequent stomachaches and headaches were due to allergies. Then they said getting her tonsils removed would solve the problem.</p>
-                <p>But it didn’t.</p>`
-            },
-            {
-              type: 'image',
-              url: Image1,
-              caption: `Alexa Kohler, a 10-year-old honorary captain at the 2018 Dribble for the Cure, learns to dribble from sophomore guard Kris Wilkes. Sunday was Alexa's fifth year participating in the annual event.`,
-              credit: 'Alice Naland/Daily Bruin',
-            },
-            {
-              type: 'text',
-              value:
-                `
+                <p>But it didn’t.</p>`,
+              },
+              {
+                type: 'image',
+                url: Image1,
+                caption: `Alexa Kohler, a 10-year-old honorary captain at the 2018 Dribble for the Cure, learns to dribble from sophomore guard Kris Wilkes. Sunday was Alexa's fifth year participating in the annual event.`,
+                credit: 'Alice Naland/Daily Bruin',
+              },
+              {
+                type: 'text',
+                value: `
                 <p>“I’d say for a good year, my husband and I took her from doctor to doctor,” Karrie Kohler said. “And after a year, we were like, ‘Look, there’s something wrong.’ So they finally did an MRI, and that’s when we found out.”</p>
                 <p>Alexa received six rounds of chemotherapy and 33 days of radiation – living at UCLA Mattel Children’s Hospital for about a year.</p>
                 <p>“What we went through with Alexa, we quickly figure out that they don't have special pediatric cancer treatment,” Pete Kohler said. “They just get the same chemo that adults get.”</p>
@@ -139,18 +141,17 @@ class IndexPage extends React.Component<{}, IndexPageState> {
                 <p>Besides participating in the Dribble, Alexa and her family also visit the doctors and nurses from UCLA that helped her through the journey to remission.</p>
                 <p>“She gets to meet some of the kids who also went though the same thing,” Karrie Kohler said. “We love the Dribble because Alexa just loves the basketball players and being able to walk with them.”</p>
                 <p>Wilkes, along with women’s basketball freshmen guards Ahlana Smith and Kiara Jefferson, was assigned to the Kohler family to dribble the course together.</p>
-                `
-            },
-            {
-              type: 'image',
-              url: Image2,
-              caption: `Alexa stood up to applaud the winners who raised the most money at this year's Dribble for the Cure.`,
-              credit: 'Jenna Nicole Smith/Daily Bruin',
-            },
-            {
-              type: 'text',
-              value:
-                `<p>After crossing the finish line into Pauley Pavilion, Wilkes was determined to help Alexa make a layup.</p>
+                `,
+              },
+              {
+                type: 'image',
+                url: Image2,
+                caption: `Alexa stood up to applaud the winners who raised the most money at this year's Dribble for the Cure.`,
+                credit: 'Jenna Nicole Smith/Daily Bruin',
+              },
+              {
+                type: 'text',
+                value: `<p>After crossing the finish line into Pauley Pavilion, Wilkes was determined to help Alexa make a layup.</p>
                 <p>"(My favorite part was) dribbling with the basketball players," Alexa said. "It was fun."</p>
                 <p>Alexa was named one of nine honorary captains – kids selected by Alice del Rosario, the fellowship coordinator for the UCLA David Geffen School of Medicine pediatric hematology and oncology program. Each honorary captain is a current or former cancer patient from Mattel Children’s Hospital. </p>
                 <p>"I just thought her story was really inspiring,” said Wayne Kamemoto, a USC graduate and a senior associate at David Weise and Associates who raised almost $20,000. “For me, I’ve been doing this for a long time, and she’s been my inspiration to get on my game a little bit (to raise more money), so I’ve always kept her in mind.”</p>
@@ -159,19 +160,28 @@ class IndexPage extends React.Component<{}, IndexPageState> {
                 <p>“He’s amazing,” Karrie Kohler said. “He told us that Alexa is the reason he keeps coming.”</p>
                 <p>Alexa is determined to keep attending each year, too.</p>
                 <p>In addition to the lemonade stand last year, Alexa has sold hand-sewn pillowcases. This year, she sold homemade tie blankets.</p>
-                <p>“She loves to raise the money for this herself,” Karrie Kohler said. “I don't know what she's going to come up with for next year, but she looks forward to (the Dribble) every year.” </p>`
-            },
-          ]}
-        />
-      </ScrollPercentage>
-    </div>);
+                <p>“She loves to raise the money for this herself,” Karrie Kohler said. “I don't know what she's going to come up with for next year, but she looks forward to (the Dribble) every year.” </p>`,
+              },
+            ]}
+          />
+        </ScrollPercentage>
+      </div>
+    )
   }
 
   article1 = () => {
-    return (<div className={css`h1 {margin-bottom: 5px;}`} id={`Wallis`}>
-        <ScrollPercentage onChange={(v) => this.state.updateEntryPercent(1, v)}>
-          <Headline text="First-year gives back to pediatric cancer cause by advocating for awareness"/>
-          <Byline authors="Cassidy Hunt"/>
+    return (
+      <div
+        className={css`
+          h1 {
+            margin-bottom: 5px;
+          }
+        `}
+        id={`Wallis`}
+      >
+        <ScrollPercentage onChange={v => this.state.updateEntryPercent(1, v)}>
+          <Headline text="First-year gives back to pediatric cancer cause by advocating for awareness" />
+          <Byline authors="Cassidy Hunt" />
           <Article
             key={1}
             content={[
@@ -183,8 +193,7 @@ class IndexPage extends React.Component<{}, IndexPageState> {
               },
               {
                 type: 'text',
-                value:
-                  `<p>Samantha Bodger was forced to choose.</p>
+                value: `<p>Samantha Bodger was forced to choose.</p>
                   <p>“It was hard, but looking back I don't regret the choice I made,” said 18-year-old Bodger, a first-year communication student. “I had to decide to go ahead and have my leg amputated and now I am 1 1/2 years cancer-free.”</p>
                   <p>At age 16, Bodger was playing soccer when she thought she may have sprained her ankle and treated it as such. She was diagnosed with osteosarcoma a few months later.</p>
                   <p>Bodger was forced to leave school and move into a pediatric cancer wing to further her treatment.</p>
@@ -193,46 +202,53 @@ class IndexPage extends React.Component<{}, IndexPageState> {
                   <p>Bodger completed six months of chemotherapy after her amputation, totaling 10 months of treatment.</p>
                   <p>As a student at UCLA, Bodger joined the Bruins Fighting Pediatric Cancer club, through which she and other members work to raise awareness and funds for pediatric cancer survivors and their families.</p>
                   <p>“Events that support specifically pediatric cancer (patients) are more few and far between than events that support cancer (patients) in general,” Bodger said. “It gets a lot less funding from the government than other types of (cancer research), so it’s really cool to see such a big event like this.”</p>
-                  `},
+                  `,
+              },
               {
                 type: 'image',
                 url: Image4,
-                caption:`Bodger (left) was accompanied at the event by her friend, first-year biochemistry student Brianna Empson. Both are members of the Bruins Fighting Pediatric Cancer club at UCLA.`,
+                caption: `Bodger (left) was accompanied at the event by her friend, first-year biochemistry student Brianna Empson. Both are members of the Bruins Fighting Pediatric Cancer club at UCLA.`,
                 credit: 'Andrew Arfin/Daily Bruin',
               },
               {
                 type: 'text',
-                value:
-                  `<p>Another Bruins Fighting Pediatric Cancer club member, first-year biochemistry student Brianna Empson, joined Bodger at Dribble for the Cure. </p>
+                value: `<p>Another Bruins Fighting Pediatric Cancer club member, first-year biochemistry student Brianna Empson, joined Bodger at Dribble for the Cure. </p>
                   <p>“I came out to show my support to survivors of pediatric cancer and to raise awareness of it because they are so strong,” Empson said. “There's not a lot of events that specialize specifically around pediatric cancer, but this is something that affects these kids for their entire lives.”</p>
                   <p>Bodger said that the children at the event and others like them motivated her during her treatment.</p>
-                  <p>“While I was on the pediatric cancer floor, I was a lot older than most of the other child fighters,” Bodger said. “Just seeing kids like them find joy in the small things really inspired me to get through. I feel like everyone can say that they are inspired by these little kids fighting to save their own lives.”</p>`
-              
+                  <p>“While I was on the pediatric cancer floor, I was a lot older than most of the other child fighters,” Bodger said. “Just seeing kids like them find joy in the small things really inspired me to get through. I feel like everyone can say that they are inspired by these little kids fighting to save their own lives.”</p>`,
               },
             ]}
           />
         </ScrollPercentage>
-      </div>);
+      </div>
+    )
   }
 
   article2 = () => {
-    return (<div className={css`h1 {margin-bottom: 5px;}`} id={`Janss`}>
-      <ScrollPercentage onChange={(v) => this.state.updateEntryPercent(2, v)}>
-        <Headline text="Young survivor finds web of support among family members"/>
-        <Byline authors="Jacqueline Dzwonczyk" />
-      <Article
-      key={2}
-      content={[
-        {
-          type: 'image',
-          url: Image5,
-          caption: `Leone Parks, a 4-year-old cancer patient, attended Dribble for the Cure with his brothers – 8-year-old Russell and 10-year-old Andrew – and his grandmother Laurel Parks.`,
-          credit: 'Alice Naland/Daily Bruin',
-        },
-        {
-          type: 'text',
-          value:
-            `<p>Leone Parks wore his light-up Spiderman shoes as a reminder of his favorite superhero.</p>
+    return (
+      <div
+        className={css`
+          h1 {
+            margin-bottom: 5px;
+          }
+        `}
+        id={`Janss`}
+      >
+        <ScrollPercentage onChange={v => this.state.updateEntryPercent(2, v)}>
+          <Headline text="Young survivor finds web of support among family members" />
+          <Byline authors="Jacqueline Dzwonczyk" />
+          <Article
+            key={2}
+            content={[
+              {
+                type: 'image',
+                url: Image5,
+                caption: `Leone Parks, a 4-year-old cancer patient, attended Dribble for the Cure with his brothers – 8-year-old Russell and 10-year-old Andrew – and his grandmother Laurel Parks.`,
+                credit: 'Alice Naland/Daily Bruin',
+              },
+              {
+                type: 'text',
+                value: `<p>Leone Parks wore his light-up Spiderman shoes as a reminder of his favorite superhero.</p>
             <p>He also wore a cape – a reminder that he is a hero for other kids struggling with pediatric cancer. </p>
             <p>“It’s fun for them to see a different side of the hospital,” said Laurel Parks, Leone’s grandmother. “To see that the hospital is more than appointments.”</p>
             <p>The 4-year-old honorary captain at Dribble for the Cure was first brought to UCLA Mattel Children's Hospital for medical treatment in February 2016.  Doctors were unsure what was causing his bruising, initially thinking that it was a case of parental abuse.</p>
@@ -240,18 +256,17 @@ class IndexPage extends React.Component<{}, IndexPageState> {
             <p>“All the kids love their parents, but the parents don’t have all their things together right now,” Roger Parks said. “I really don’t know how it’s going to work out, but we’re just trying to do the best we can.”</p>
             <p>Leone was put on a four-year treatment plan, which is set to last until May 2020.  Though he is stable now, he spent six weeks in the intensive care unit after catching two different types of the flu in the spring.</p>
             <p>Leone’s grandfather lived with him at the hospital, holding the child in his lap for the "scary" parts of treatment.  The 4-year-old was 20 pounds lighter when he returned to his family.</p>
-            `
-        },
-        {
-          type: 'image',
-          url: Image6,
-          caption: `UCLA men's basketball redshirt freshman forward Jalen Hill was paired up with Leone Parks and his grandparents, Roger and Laurel Parks, during the event.`,
-          credit: 'Alice Naland/Daily Bruin',
-        },
-        {
-          type: 'text',
-          value:
-            `<p>“(Leone) was crying sometimes, so we waited for him the day he was going to come home," said Leone’s oldest brother Andrew Parks. "I gave him a hug ... (and) I read to him.”</p>
+            `,
+              },
+              {
+                type: 'image',
+                url: Image6,
+                caption: `UCLA men's basketball redshirt freshman forward Jalen Hill was paired up with Leone Parks and his grandparents, Roger and Laurel Parks, during the event.`,
+                credit: 'Alice Naland/Daily Bruin',
+              },
+              {
+                type: 'text',
+                value: `<p>“(Leone) was crying sometimes, so we waited for him the day he was going to come home," said Leone’s oldest brother Andrew Parks. "I gave him a hug ... (and) I read to him.”</p>
             <p>Since being released from the hospital, Leone has about one appointment a month – an improvement from his previous daily appointments.</p>
             <p>Roger Parks takes his grandson to every appointment, waking up at 5 a.m. to commute from Thousand Oaks, California, to the UCLA hospital.</p>
             <p>“Lately, we don’t have tears when I wake him up at 5 in the morning to get ready to leave,” Laurel Parks said. "He didn’t want to go – let’s face it, he knows what’s waiting for him.”</p>
@@ -261,32 +276,40 @@ class IndexPage extends React.Component<{}, IndexPageState> {
             <p>Roger and Laurel Parks take the kids to the movies Sunday mornings when they can have the theater to themselves in order to avoid Leone coming into contact with excessive germs.</p>
             <p>Although Leone couldn't dribble himself, UCLA athletes helped him around the course, pushing his stroller all the way to the finish line. The Dribble was the first public event Leone has been stable enough to attend since being diagnosed with cancer. </p>
             <p>His progress is a relief to his grandparents, who are 10 years retired.</p>
-            <p>“We’ve given up everything,” Laurel Parks said. “Our whole life is taking care of the kids.”</p>`
-        },
-      ]}
-    />
-    </ScrollPercentage>
-    </div>);
+            <p>“We’ve given up everything,” Laurel Parks said. “Our whole life is taking care of the kids.”</p>`,
+              },
+            ]}
+          />
+        </ScrollPercentage>
+      </div>
+    )
   }
 
   article3 = () => {
-    return (<div className={css`h1 {margin-bottom: 5px;}`} id={`Plaza`}>
-      <ScrollPercentage onChange={(v) => this.state.updateEntryPercent(3, v)}>
-      <Headline text="Friends, family of young cancer patient team up to celebrate her memory"/>
-      <Byline authors="Gabriel McCarthy"/>
-    <Article
-      key={3}
-      content={[
-        {
-          type: 'image',
-          url: Image7,
-          caption: `The Guru Simran team has been participating in the Dribble for the Cure for the past 10 years, joining to represent Guru Simran Kaur Khalsa. The team recently combined with the Hoop Masters baskeball club of West Los Angeles.`,
-          credit: 'Daniel Leibowitz/Daily Bruin staff',
-        },
-        {
-          type: 'text',
-          value:
-            `<p>One person handing out maroon T-shirts emblazoned with “GuruSimran #8 GUSOO” stood out among the crowd that was gathered around the entrance to Drake Stadium. </p>
+    return (
+      <div
+        className={css`
+          h1 {
+            margin-bottom: 5px;
+          }
+        `}
+        id={`Plaza`}
+      >
+        <ScrollPercentage onChange={v => this.state.updateEntryPercent(3, v)}>
+          <Headline text="Friends, family of young cancer patient team up to celebrate her memory" />
+          <Byline authors="Gabriel McCarthy" />
+          <Article
+            key={3}
+            content={[
+              {
+                type: 'image',
+                url: Image7,
+                caption: `The Guru Simran team has been participating in the Dribble for the Cure for the past 10 years, joining to represent Guru Simran Kaur Khalsa. The team recently combined with the Hoop Masters baskeball club of West Los Angeles.`,
+                credit: 'Daniel Leibowitz/Daily Bruin staff',
+              },
+              {
+                type: 'text',
+                value: `<p>One person handing out maroon T-shirts emblazoned with “GuruSimran #8 GUSOO” stood out among the crowd that was gathered around the entrance to Drake Stadium. </p>
             <p>Dribble for the Cure participant Ashley Fleming is a part of the 35-participant Guru Simran group, with members hailing from around the Los Angeles area to support the Pediatric Cancer Research Foundation’s event. </p>
             <p>“We walk in honor of my very good friend's daughter. My daughter and Guru Simran (Kaur Khalsa) were friends since they were 4 years old," Fleming said. "My daughter went to school with her and played basketball with her. Guru Simran loved basketball and, even though we lost her nine years ago, it is still fresh today.” </p>
             <p>Guru Simran died nine years ago at the age of 14 from an inoperable brain tumor. </p>
@@ -294,17 +317,17 @@ class IndexPage extends React.Component<{}, IndexPageState> {
             <p>Dharam Dev Kaur Khalsa said the families still have close ties to UCLA and the campus area, as many of the current honorary captains for the Dribble were treated at the Mattel Children’s Hospital. </p>
             <p>Fleming said the team has grown in size since it joined the ranks of dribblers 10 years ago, one year after the fundraiser began. </p>
             <p>The team has brought at least 35 participants every year, raising $9,000 in the first two years and $3,000 up until this year. </p>
-            `},
-        {
-          type: 'image',
-          url: Image8,
-          caption: `Participant Dharam Dev Kaur Khalsa holds up one of the Guru Simran team shirts for size against redshirt junior guard Prince Ali before participating in the dribble around campus.`,
-          credit: 'Daniel Leibowitz/Daily Bruin staff',
-        },
-        {
-          type: 'text',
-          value:
-            `<p>Aileen Wong, a participant in the Dribble and the mother of Guru Simran’s childhood friend, said basketball brought the families together, which is why the team takes Guru Simran's number eight jersey number in its name. </p>
+            `,
+              },
+              {
+                type: 'image',
+                url: Image8,
+                caption: `Participant Dharam Dev Kaur Khalsa holds up one of the Guru Simran team shirts for size against redshirt junior guard Prince Ali before participating in the dribble around campus.`,
+                credit: 'Daniel Leibowitz/Daily Bruin staff',
+              },
+              {
+                type: 'text',
+                value: `<p>Aileen Wong, a participant in the Dribble and the mother of Guru Simran’s childhood friend, said basketball brought the families together, which is why the team takes Guru Simran's number eight jersey number in its name. </p>
             <p>"Guru Simran was a year older than our girls, but they went to the same elementary school and were in a class together for a year and they became good friends,” Wong said. “She was very sweet and was a fierce competitor on the basketball team." </p>
             <p>The Guru Simran team has adopted more causes from around the youth basketball circuit into the group, recently adding the Hoop Masters basketball team, a West LA youth basketball program. </p>
             <p>Fleming's son Wonder Smith – a former UCLA men's basketball player – grew up playing in the program with Maxwell Kupchak, the son of former Los Angeles Lakers general manager Mitch Kupchak. </p>
@@ -312,30 +335,38 @@ class IndexPage extends React.Component<{}, IndexPageState> {
             <p>The Guru Simran team is still woven into UCLA's basketball programs, with freshman guard Jules Bernard being a Hoop Masters alumnus and Fleming’s daughter playing high school basketball with former women's basketball guard Jordin Canada. </p>
             <p>“Our lives are always swirling and connected to each other, and I think that it is great to continue to show our love to the two families along with the excitement of the men's and women's basketball teams,” Fleming said. </p>
             <p>Fleming said that, despite not having a survivor with them today, the team members' goal is to continue Guru Simran’s legacy by helping future research.</p>
-            <p>"(Guru Simran had) so much life and joy and it's really cool because I feel her spirit is with us and shines brightly,” Fleming said. “She has done so much for so many, even just being in heaven. We want to make sure children that can be helped can be." </p>`
-        },
-      ]}
-    />
-    </ScrollPercentage>
-    </div>);
+            <p>"(Guru Simran had) so much life and joy and it's really cool because I feel her spirit is with us and shines brightly,” Fleming said. “She has done so much for so many, even just being in heaven. We want to make sure children that can be helped can be." </p>`,
+              },
+            ]}
+          />
+        </ScrollPercentage>
+      </div>
+    )
   }
 
   article4 = () => {
-    return(<div className={css`h1 {margin-bottom: 5px;}`} id={`Pauley`}>
-        <ScrollPercentage onChange={(v) => this.state.updateEntryPercent(4, v)}>
-          <Headline text="Student-athletes rebound and rebond with juvenile jocks"/>
+    return (
+      <div
+        className={css`
+          h1 {
+            margin-bottom: 5px;
+          }
+        `}
+        id={`Pauley`}
+      >
+        <ScrollPercentage onChange={v => this.state.updateEntryPercent(4, v)}>
+          <Headline text="Student-athletes rebound and rebond with juvenile jocks" />
           <Byline authors="Angie Forburger" />
           <Article
-          key={4}
-          content={[
-            {
-              type: 'video',
-              url: Video2,
-            },
-            {
-              type: 'text',
-              value:
-                `<p>Jalen Hill never lost sight of 4-year-old Leone Parks.</p>
+            key={4}
+            content={[
+              {
+                type: 'video',
+                url: Video2,
+              },
+              {
+                type: 'text',
+                value: `<p>Jalen Hill never lost sight of 4-year-old Leone Parks.</p>
                 <p>From the start of Dribble for the Cure, the UCLA men’s basketball redshirt freshman forward stuck beside the young cancer patient, pushing his stroller and listening to his every word.</p>
                 <p>“He just wanted to talk the whole time,” Hill said. “He talked about what he does every day and he enjoyed what today was, so I just went along with it.” </p>
                 <p>Hill participated in the event with the rest of the men's and women's basketball teams, walking alongside families of cancer patients that the players were assigned to.</p>
@@ -343,18 +374,17 @@ class IndexPage extends React.Component<{}, IndexPageState> {
                 <p>Men’s basketball coach Steve Alford – who has led the Bruins in the event for the past six years – said the presence of the athletes is something the children will remember for a long time.</p>
                 <p>“You can have guys that just don't engage and aren’t interactive with (the children)," Alford said. "(But) you saw (the men's and women's teams) shooting around with the kids, walking with them and dribbling with them across campus and actually diving into their lives, even if it’s for a couple hours.”</p>
                 <p>Men’s basketball sophomore guard Joseph Wallace and freshman guard David Singleton played games of one-on-one against some of the participants after they crossed the finish line in Pauley Pavilion. </p>
-                <p>“They beat Joe, but they didn't beat me,” Singleton said.</p>`
-            },
-            {
-              type: 'image',
-              url: Image9,
-              caption: `UCLA men’s basketball redshirt freshman forward Jalen Hill spent time with 4-year-old cancer patient Leone Parks at this year's Dribble for the Cure. Hill was one of many athletes present at the event.`,
-              credit: 'Axel Lopez/Assistant Photo editor',
-            },
-            {
-              type: 'text',
-              value:                
-                `
+                <p>“They beat Joe, but they didn't beat me,” Singleton said.</p>`,
+              },
+              {
+                type: 'image',
+                url: Image9,
+                caption: `UCLA men’s basketball redshirt freshman forward Jalen Hill spent time with 4-year-old cancer patient Leone Parks at this year's Dribble for the Cure. Hill was one of many athletes present at the event.`,
+                credit: 'Axel Lopez/Assistant Photo editor',
+              },
+              {
+                type: 'text',
+                value: `
                 <p>Sophomore guard Chris Smith walked the mile-long course alongside Kenny Thomas – a 14-year-old freshman in high school who battled cancer six years ago.</p>
                 <p>Kenny served as one of the honorary captains for the Dribble and shared his story at the closing ceremony of the event. He noted his recent achievements of making his high school basketball team and earning a 4.0 GPA, getting closer to his goal of becoming a sports journalist.</p>
                 <p>“When we saw him six years ago versus what we see now, it’s a miracle,” Alford said. “That's kind of cool to be a part of.”</p>
@@ -362,29 +392,29 @@ class IndexPage extends React.Component<{}, IndexPageState> {
                 <p>Women’s tennis senior Ayan Broomfield and redshirt junior Jada Hart met participants by handing out cinnamon rolls and bottles of water.</p>
                 <p>While some Bruins began talking to any of the children around them, other athletes sought out familiar faces.</p>
                 <p>Women’s basketball redshirt senior forward Lajahna Drummer spent her time with 12-year-old Alanna Neale – a frequent participant at the Bruins’ basketball camps.</p>
-                `
-            },
-            {
-              type: 'image',
-              url: Image10,
-              caption: `Women’s basketball redshirt senior forward Lajahna Drummer met up with 12-year-old Alanna Neale at Dribble for the Cure. Drummer said Neale has frequently attended the Bruins' basketball camps.`,
-              credit: 'Axel Lopez/Assistant Photo editor',
-            },
-            {
-              type: 'text',
-              value:   
-                `<p>“She's one of my favorite campers because she just has this big personality and spirit,” Drummer said. “She’s very excited about basketball, so that's why I just clung onto her and tried to keep encouraging her and be that big sister.”</p>
+                `,
+              },
+              {
+                type: 'image',
+                url: Image10,
+                caption: `Women’s basketball redshirt senior forward Lajahna Drummer met up with 12-year-old Alanna Neale at Dribble for the Cure. Drummer said Neale has frequently attended the Bruins' basketball camps.`,
+                credit: 'Axel Lopez/Assistant Photo editor',
+              },
+              {
+                type: 'text',
+                value: `<p>“She's one of my favorite campers because she just has this big personality and spirit,” Drummer said. “She’s very excited about basketball, so that's why I just clung onto her and tried to keep encouraging her and be that big sister.”</p>
                 <p>Women’s basketball coach Cori Close said other players have developed deeper connections with some of the children, such as junior forward Ally Rosenblum’s two-year friendship with 7-year-old Grayson Marzotti-Miller – another honorary captain.</p>
                 <p>Close said watching the athletes interact with children on that level is a unique feeling. </p>
                 <p>“It’s literally life-changing,” Close said. “They know they did something that’s bigger than themselves, so it is truly our honor and it changes our hearts the most.”</p>
                 <p>As many of the athletes prepare to take the field or the court – some for the first time this season – each young cancer patient is an inspiration. </p>
                 <p>For Hill, Leone’s spirit and his bright pink cape will especially stick in his mind.</p>
-                <p>“Sometimes you're going through things and you think you're going through the worst thing,” Hill said. “But there's always somebody else that's going through something worse. Seeing that he is just attacking it with a smile (and) having fun, it makes my day better.”</p>`
-            },
-          ]}
-        />
+                <p>“Sometimes you're going through things and you think you're going through the worst thing,” Hill said. “But there's always somebody else that's going through something worse. Seeing that he is just attacking it with a smile (and) having fun, it makes my day better.”</p>`,
+              },
+            ]}
+          />
         </ScrollPercentage>
-      </div>);
+      </div>
+    )
   }
 
   render() {
@@ -396,76 +426,134 @@ class IndexPage extends React.Component<{}, IndexPageState> {
           url="https://features.dailybruin.com/2017/close-to-home/"
           image="https://lh3.googleusercontent.com/Eg4qDeTD4Efy07T52jJj5DUG4oRyaetRH0UGfkHoT0jBeFlCoVdAVtLNuMq2vR1XkUbv=w300"
         />
-        <Board 
+        <Board
           backgroundSrc="https://images.unsplash.com/photo-1539442836969-3938f1cd2179?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=79e3365148694703fd13d85918c18903&auto=format&fit=crop&w=668&q=80"
           iconSrc="data:image/png;base64,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"
           title="dribble for the cure"
           subtitle="bouncing one step closer to a cure for pediatric cancer"
-          />
-          <p style={{width: "100%", padding: "0 8vw", textAlign: "center", marginBottom: "50px"}}>UCLA, along with the Pediatric Cancer Research Foundation and the Cancer Research Program at the Mattel Children’s Hospital, held its 11th annual Dribble for the Cure on Sunday. John Vallely, a former UCLA men’s basketball player under coach John Wooden, <a href="http://dailybruin.com/2018/10/12/former-ucla-basketball-player-leads-11th-annual-dribble-for-the-cure/">started the event in 2008</a>. This year’s Dribble was also a celebration of what would have been Wooden’s 108th birthday. The event raised money to go toward research and treatment for children fighting cancer.</p>
+        />
+        <p
+          style={{
+            width: '100%',
+            padding: '0 8vw',
+            textAlign: 'center',
+            marginBottom: '50px',
+          }}
+        >
+          UCLA, along with the Pediatric Cancer Research Foundation and the
+          Cancer Research Program at the Mattel Children’s Hospital, held its
+          11th annual Dribble for the Cure on Sunday. John Vallely, a former
+          UCLA men’s basketball player under coach John Wooden,{' '}
+          <a href="http://dailybruin.com/2018/10/12/former-ucla-basketball-player-leads-11th-annual-dribble-for-the-cure/">
+            started the event in 2008
+          </a>
+          . This year’s Dribble was also a celebration of what would have been
+          Wooden’s 108th birthday. The event raised money to go toward research
+          and treatment for children fighting cancer.
+        </p>
         <ProgressContext.Provider value={this.state}>
-          <div style={{ position: this.state.showSlides ? "relative" : "static" }}>
-            {this.state.width > 800 && <div className={css`
-              position: -webkit-sticky;
-              position: sticky;
-              top: 0;
-              float: left;
-              width: 30%;
-            `
-            }>
-              <Menu />
-            </div>
-            }
-            <div style={{
-              float: 'left',
-              width: this.state.width > 800 ? '70%' : "100%",
-            }}>
-            </div>
-            <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
-              <div style={{maxWidth: 700,marginLeft: "15px", marginRight: "15px"}}>
+          <div
+            style={{ position: this.state.showSlides ? 'relative' : 'static' }}
+          >
+            {this.state.width > 800 && (
+              <div
+                className={css`
+                  position: -webkit-sticky;
+                  position: sticky;
+                  top: 0;
+                  float: left;
+                  width: 30%;
+                `}
+              >
+                <Menu />
+              </div>
+            )}
+            <div
+              style={{
+                float: 'left',
+                width: this.state.width > 800 ? '70%' : '100%',
+              }}
+            />
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <div
+                style={{
+                  maxWidth: 700,
+                  marginLeft: '15px',
+                  marginRight: '15px',
+                }}
+              >
                 {this.article0()}
-                <div style={{height: 50}}/>
+                <div style={{ height: 50 }} />
                 {this.article1()}
-                <div style={{height: 50}}/>
+                <div style={{ height: 50 }} />
                 {this.article2()}
-                <div style={{height: 50}}/>
+                <div style={{ height: 50 }} />
                 {this.article3()}
-                <div style={{height: 50}}/>
+                <div style={{ height: 50 }} />
                 {this.article4()}
               </div>
             </div>
-            <div style={{
-              display: "table",
-              clear: 'both',
-            }}></div>
+            <div
+              style={{
+                display: 'table',
+                clear: 'both',
+              }}
+            />
           </div>
         </ProgressContext.Provider>
-        {this.state.showSlides &&
-          <div style={{
-            position: "absolute",
-            top: "0",
-            width: "100%",
-            height: "100%",
-            zIndex: 10,
-            overflow: "hidden",
-          }}>
-            <div style={{
-              position: "absolute",
-              width: "100%",
-              height: "100%",
-              backgroundColor: "black",
-              opacity: 0.9,
-            }}></div>
+        {this.state.showSlides && (
+          <div
+            style={{
+              position: 'absolute',
+              top: '0',
+              width: '100%',
+              height: '100%',
+              zIndex: 10,
+              overflow: 'hidden',
+            }}
+          >
+            <div
+              style={{
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                backgroundColor: 'black',
+                opacity: 0.9,
+              }}
+            />
           </div>
-        }
-        <p style={{width: "100%", padding: "0 8vw", textAlign: "center", marginTop: "50px", marginBottom: "50px"}}>Check out more photos of the event <a href="https://dailybruin.com/2018/10/14/gallery-dribble-for-the-cure/">here</a>!</p>
+        )}
+        <p
+          style={{
+            width: '100%',
+            padding: '0 8vw',
+            textAlign: 'center',
+            marginTop: '50px',
+            marginBottom: '50px',
+          }}
+        >
+          Check out more photos of the event{' '}
+          <a href="https://dailybruin.com/2018/10/14/gallery-dribble-for-the-cure/">
+            here
+          </a>
+          !
+        </p>
         <Footer
-          githubName={'https://github.com/dailybruin/interactive.2018.dribble-for-the-cure'}
+          githubName={
+            'https://github.com/dailybruin/interactive.2018.dribble-for-the-cure'
+          }
           developers={['Richard Yang', 'Kevin Qian']}
           copyrightYear={2018}
         />
       </div>
-    );
+    )
   }
 }
 

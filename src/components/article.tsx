@@ -1,5 +1,5 @@
-import * as React from 'react';
-import './style.scss';
+import * as React from 'react'
+import './style.scss'
 
 export interface ImageProps {
   index: number // KSM: added for indexing of slide image
@@ -21,7 +21,11 @@ export interface VideoProps {
 export function Image(props: ImageProps) {
   return (
     <figure className="img-container">
-      <img src={props.url} alt={props.alt} onClick={() => props.mediaOnClick()} />
+      <img
+        src={props.url}
+        alt={props.alt}
+        onClick={() => props.mediaOnClick()}
+      />
       <figcaption className="caption-container">
         <div className="caption">
           {props.caption} ({props.credit})
@@ -34,12 +38,16 @@ export function Image(props: ImageProps) {
 export function Video(props: VideoProps) {
   return (
     <figure>
-      <video muted
+      <video
+        muted
         src={props.url}
         width="100%"
         height="100%"
-        className="vi" autoPlay loop>
-          Sorry, your browser doesn't support embedded videos.
+        className="vi"
+        autoPlay
+        loop
+      >
+        Sorry, your browser doesn't support embedded videos.
       </video>
     </figure>
   )
@@ -70,7 +78,7 @@ export default class Article extends React.Component<ArticleProps> {
   public static defaultProps = {
     dropcap: false,
     mediaOnClick: () => {},
-    id: "",
+    id: '',
   }
 
   public render() {
