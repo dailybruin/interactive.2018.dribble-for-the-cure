@@ -1,5 +1,10 @@
 import * as React from 'react';
 import { Head, Footer } from '@dailybruin/lux';
+import 'intersection-observer';
+import smoothscroll from 'smoothscroll-polyfill';
+
+smoothscroll.polyfill();
+
 // import { Article } from '@dailybruin/lux';
 // /*
 //  * Coverphoto
@@ -200,7 +205,7 @@ class IndexPage extends React.Component<{}, IndexPageState> {
           subtitle="mini-boom"
           />
         <ProgressContext.Provider value={this.state}>
-          <div style={{ position: this.state.showSlides ? "fixed" : "static" }}>
+          <div style={{ position: this.state.showSlides ? "relative" : "static" }}>
             <div style={{
               position: 'sticky',
               top: 0,
