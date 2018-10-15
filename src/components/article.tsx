@@ -20,7 +20,7 @@ export interface VideoProps {
 export function Image(props: ImageProps) {
   return (
     <figure>
-      <img src={props.url} alt={props.alt} onClick={() => props.mediaOnClick()} />
+      <img src={props.url} alt={props.alt}/>
       <figcaption>
         {props.caption} ({props.credit})
       </figcaption>

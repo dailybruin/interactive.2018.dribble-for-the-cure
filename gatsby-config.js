@@ -28,5 +28,12 @@ module.exports = {
         pathToConfigModule: 'src/utils/typography.js',
       },
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `pages`,
+        path: `${__dirname}/src/assets/`,
+      },
+    },
   ],
 }
