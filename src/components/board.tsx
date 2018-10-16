@@ -16,9 +16,9 @@ export default class Board extends React.Component<BoardProps> {
     return <div className="board">
       <div className="background-wrapper">
         <video muted autoPlay loop preload="auto"
+        poster={Img}
         src={Vid}
         className={css`object-fit: cover; transform: translate(-400px, -140px);`}>
-          <img className="background" src={Img} alt="board background" />
         </video>
         <div className="background-filter"/>
       </div>

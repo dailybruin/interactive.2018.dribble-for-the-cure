@@ -16,6 +16,7 @@ export interface VideoProps {
   caption: string
   credit: string
   alt: string
+  poster: any
 }
 
 export function Image(props: ImageProps) {
@@ -34,12 +35,12 @@ export function Image(props: ImageProps) {
 export function Video(props: VideoProps) {
   return (
     <figure>
-      <video muted
+      <video muted loop autoPlay
         src={props.url}
+        poster={props.poster}
         width="100%"
-        height="100%"
-        className="vi" autoPlay loop>
-          Sorry, your browser doesn't support embedded videos.
+        height="100%">
+          <img src={props.poster}/>
       </video>
     </figure>
   )

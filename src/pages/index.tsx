@@ -11,6 +11,7 @@ import { ProgressContext } from '../contexts/contexts';
 import ScrollPercentage from 'react-scroll-percentage';
 import { css } from 'emotion';
 
+import Image0 from '../images/web.sp.dbcstillphoto.JS.jpg';
 import Image1 from '../images/web.sp.dbcJoy.AN.jpg';
 import Image2 from '../images/web.sp.dbcJoy.JS.picB.jpg';
 import Image3 from '../images/web.sp.dbc.Cassidy.AA.jpg';
@@ -23,8 +24,9 @@ import Image9 from '../images/web.sp.dbcAngie.AL.jpg';
 import Image10 from '../images/web.sp.dbcangie.AL.picB.jpg';
 
 import Video1 from '../images/Kohlervideo.mp4';
+import VidPoster1 from '../images/Koh_ss.png';
 import Video2 from '../images/StudentAthletes.mp4';
-
+import VidPoster2 from '../images/ath_ss.png';
 
 // Custom implementation
 ScrollPercentage.calculatePercentage = (bounds, _) => {
@@ -100,7 +102,7 @@ class IndexPage extends React.Component<{}, IndexPageState> {
     return(
     <div className={css`h1 {margin-bottom: 5px;}`} id={`Drake`}>
       <ScrollPercentage onChange={(v) => this.state.updateEntryPercent(0, v)}>
-        <Headline text="Ten-year-old entrepreneur inspires others to support, perspires on the court"/>
+        <Headline text="Ten-year-old inspires others to support, perspires on the court"/>
         <Byline authors="Joy Hong" />
         <Article
           key={0}
@@ -108,14 +110,15 @@ class IndexPage extends React.Component<{}, IndexPageState> {
             {
               type: 'video',
               url: Video1,
+              poster: VidPoster1,
             },
             {
               type: 'text',
               value:
-                `<p>Ten-year-old Alexa Kohler swatted a ball from Kris Wilkes as they crossed the finish line together.</p>
+                `<p>Alexa Kohler swatted a ball from Kris Wilkes as they crossed the finish line together.</p>
                 <p>He dropped the ball. </p>
                 <p>“Ah, turnover,” said the UCLA men’s basketball sophomore guard. </p>
-                <p>Alexa ran to retrieve the ball – something she couldn’t have done five years ago.</p>
+                <p>The 10-year-old ran to retrieve the ball – something she couldn’t have done five years ago.</p>
                 <p>While Dribble for the Cure participants raise money by collecting pledges from friends and family, Alexa sets up a lemonade stand every year to the raise money herself. Alexa battled brain cancer for a year in 2013, and has since participated in UCLA’s annual event.</p>
                 <p>“We do some other (events) like Make-A-Wish (Foundation), and those go to really good causes,” said her father Pete Kohler. “But this is one of the only ones we really like and come back to (every year) because the money is going to doctors for research to come up with better treatments.”</p>
                 <p> Anything to improve medical advancement in pediatric cancer research has been a priority for the Kohler family. Karrie Kohler, Alexa’s mother, said it took nearly a year to confirm Alexa’s diagnosis.</p>
@@ -323,7 +326,7 @@ class IndexPage extends React.Component<{}, IndexPageState> {
   article4 = () => {
     return(<div className={css`h1 {margin-bottom: 5px;}`} id={`Pauley`}>
         <ScrollPercentage onChange={(v) => this.state.updateEntryPercent(4, v)}>
-          <Headline text="Student-athletes rebound and rebond with juvenile jocks"/>
+          <Headline text="Student-athletes rebound and rebond with participants"/>
           <Byline authors="Angie Forburger" />
           <Article
           key={4}
@@ -331,6 +334,7 @@ class IndexPage extends React.Component<{}, IndexPageState> {
             {
               type: 'video',
               url: Video2,
+              poster: VidPoster2,
             },
             {
               type: 'text',
@@ -388,13 +392,15 @@ class IndexPage extends React.Component<{}, IndexPageState> {
   }
 
   render() {
+    if (typeof window === `undefined`)
+      return(<p>Loading...</p>);
     return (
       <div>
         <Head
-          siteName="Dribble for the Cure"
+          siteName="Dribble for the Cure | The Daily Bruin"
           description="bouncing one step closer to a cure for pediatric cancer"
-          url="https://features.dailybruin.com/2017/close-to-home/"
-          image="https://lh3.googleusercontent.com/Eg4qDeTD4Efy07T52jJj5DUG4oRyaetRH0UGfkHoT0jBeFlCoVdAVtLNuMq2vR1XkUbv=w300"
+          url="https://features.dailybruin.com/2018/dribble-for-the-cure/"
+          image={Image0}
         />
         <Board 
           backgroundSrc="https://images.unsplash.com/photo-1539442836969-3938f1cd2179?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=79e3365148694703fd13d85918c18903&auto=format&fit=crop&w=668&q=80"
