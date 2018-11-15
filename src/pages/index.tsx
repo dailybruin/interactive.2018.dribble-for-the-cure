@@ -543,7 +543,7 @@ class IndexPage extends React.Component<{}, IndexPageState> {
           githubName={
             'https://github.com/dailybruin/interactive.2018.dribble-for-the-cure'
           }
-          developers={['Richard Yang', 'Kevin Qian']}
+          developers={['Callista Wu', 'Richard Yang', 'Kevin Qian']}
           copyrightYear={2018}
         />
       </div>
